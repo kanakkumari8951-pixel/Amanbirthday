@@ -66,8 +66,13 @@ lightsButton.addEventListener("click", () => {
 const musicButton =
     document.getElementById("musicButton");
 
-
+const birthdayMusic =
+    document.getElementById("birthdayMusic");
 musicButton.addEventListener("click", () => {
+
+    birthdayMusic.currentTime = 0;
+
+    birthdayMusic.play();
 
     musicButton.innerText =
         "Music Playing ♪";
@@ -81,7 +86,6 @@ musicButton.addEventListener("click", () => {
     }, 1200);
 
 });
-
 
 // ---------- Decoration Scene ----------
 
