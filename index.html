@@ -143,18 +143,26 @@
 
 </section>
     
+<script>
 
-    <script>
-        document
-            .getElementById("startButton")
-            .addEventListener("click", function () {
+document.getElementById("startButton").addEventListener("click", function () {
 
-                document.getElementById("firstScreen").style.display = "none";
+    document.getElementById("firstScreen").style.display = "none";
 
-                document.getElementById("secondScreen").style.display = "flex";
+    document.getElementById("secondScreen").style.display = "flex";
 
-            });
-    </script>
+});
+
+
+document.getElementById("continueButton").addEventListener("click", function () {
+
+    document.getElementById("secondScreen").style.display = "none";
+
+    document.getElementById("thirdScreen").style.display = "flex";
+
+});
+
+</script>
 
 </body>
 </html>
