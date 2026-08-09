@@ -82,7 +82,7 @@ musicButton.addEventListener("click", async () => {
             "Music Playing ♪";
 
         showScene(4);
-createBalloons();
+
 
     } catch (error) {
 
