@@ -189,14 +189,14 @@
 
 <script>
 
-document.getElementById("startButton").addEventListener("click", function () {
-    document.getElementById("birthdayMusic").play();
+document.getElementById("startButton").addEventListener("click", function() {
 
     document.getElementById("firstScreen").style.display = "none";
-
     document.getElementById("secondScreen").style.display = "flex";
 
-});
+    document.getElementById("birthdayMusic").play().catch(function() {
+        console.log("Music could not start automatically.");
+    });
 
 
 document.getElementById("continueButton").addEventListener("click", function () {
