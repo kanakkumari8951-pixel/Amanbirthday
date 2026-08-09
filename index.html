@@ -32,9 +32,10 @@
                     I made something just for you.
                 </p>
 
-                <button id="startButton">
-                    Begin the Surprise
-                    <span>♡</span>
+                <button id="startButton"
+        onclick="document.querySelectorAll('.scene').forEach(s => s.classList.remove('active')); document.getElementById('scene2').classList.add('active');">
+    Begin the Surprise
+    <span>♡</span>
                 </button>
 
             </div>
