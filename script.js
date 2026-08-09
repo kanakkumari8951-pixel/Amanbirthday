@@ -1,424 +1,514 @@
-// ================================
-// AMAN'S BIRTHDAY WEBSITE
-// Main interaction controller
-// ================================
+/* =====================================================
+   AMAN'S BIRTHDAY WEBSITE
+   COMPLETE INTERACTION SCRIPT
+   ===================================================== */
+
+(function () {
+
+    "use strict";
+
+    /* -------------------------------------------------
+       SCENE CONTROLLER
+       ------------------------------------------------- */
+
+    function showScene(number) {
+
+        const scenes = document.querySelectorAll(".scene");
+
+        scenes.forEach(function (scene) {
+            scene.classList.remove("active");
+        });
+
+        const target = document.getElementById("scene" + number);
+
+        if (target) {
+            target.classList.add("active");
+
+            window.scrollTo({
+                top: 0,
+                behavior: "instant"
+            });
+        }
+    }
+
+    /* Make it available to HTML onclick */
+    window.showScene = showScene;
 
 
-// ---------- Scene Controller ----------
+    /* -------------------------------------------------
+       START BUTTON
+       SCENE 1 → SCENE 2
+       ------------------------------------------------- */
 
-function showScene(sceneNumber) {
+    function startSurprise() {
+        showScene(2);
+    }
 
-    const scenes = document.querySelectorAll(".scene");
+    window.startSurprise = startSurprise;
 
-    scenes.forEach(scene => {
-        scene.classList.remove("active");
+
+    /* -------------------------------------------------
+       LIGHTS
+       SCENE 2 → SCENE 3
+       ------------------------------------------------- */
+
+    function turnOnLights() {
+
+        const room = document.querySelector(".room");
+        const button = document.getElementById("lightsButton");
+
+        if (room) {
+            room.classList.add("lit");
+        }
+
+        if (button) {
+            button.innerText = "Lights Are On ✦";
+            button.disabled = true;
+        }
+
+        setTimeout(function () {
+            showScene(3);
+        }, 1200);
+    }
+
+
+    /* -------------------------------------------------
+       MUSIC
+       SCENE 3 → SCENE 4
+       ------------------------------------------------- */
+
+    async function playBirthdayMusic() {
+
+        const music = document.getElementById("birthdayMusic");
+        const button = document.getElementById("musicButton");
+
+        if (button) {
+            button.innerText = "Playing Music ♪";
+        }
+
+        if (music) {
+
+            try {
+
+                music.currentTime = 0;
+                music.volume = 1;
+
+                await music.play();
+
+            } catch (error) {
+
+                console.log(
+                    "Music could not start:",
+                    error
+                );
+
+            }
+        }
+
+        /*
+         * IMPORTANT:
+         * Even if the audio fails, the website continues.
+         */
+        setTimeout(function () {
+            showScene(4);
+        }, 700);
+    }
+
+
+    /* -------------------------------------------------
+       DECORATION
+       SCENE 4 → SCENE 5
+       ------------------------------------------------- */
+
+    function decorate() {
+
+        createBalloons();
+
+        const button =
+            document.getElementById("decorateButton");
+
+        if (button) {
+            button.innerText =
+                "Let the magic begin ✦";
+
+            button.disabled = true;
+        }
+
+        setTimeout(function () {
+            showScene(5);
+        }, 1500);
+    }
+
+
+    /* -------------------------------------------------
+       BALLOON / DECORATION GENERATOR
+       ------------------------------------------------- */
+
+    function createBalloons() {
+
+        const container =
+            document.getElementById("balloonContainer");
+
+        if (!container) {
+            return;
+        }
+
+        container.innerHTML = "";
+
+
+        /* ---------- Dynamic decoration CSS ---------- */
+
+        if (!document.getElementById("birthdayEffects")) {
+
+            const style =
+                document.createElement("style");
+
+            style.id = "birthdayEffects";
+
+            style.textContent = `
+
+                .birthday-balloon {
+                    position: absolute;
+                    bottom: -100px;
+                    width: 42px;
+                    height: 54px;
+                    border-radius: 50%;
+                    opacity: 0;
+                    animation:
+                        balloonRise 7s ease-out forwards,
+                        balloonSway 3s ease-in-out infinite alternate;
+                    z-index: 2;
+                }
+
+                .birthday-balloon::after {
+                    content: "";
+                    position: absolute;
+                    width: 1px;
+                    height: 80px;
+                    background: rgba(255,255,255,.25);
+                    left: 50%;
+                    top: 100%;
+                }
+
+                .birthday-star {
+                    position: absolute;
+                    width: 5px;
+                    height: 5px;
+                    border-radius: 50%;
+                    background: #f6dfaa;
+                    box-shadow:
+                        0 0 8px #f6dfaa,
+                        0 0 16px rgba(246,223,170,.6);
+                    animation: starTwinkle 2s ease-in-out infinite;
+                    z-index: 1;
+                }
+
+                .birthday-petal {
+                    position: absolute;
+                    width: 9px;
+                    height: 14px;
+                    border-radius: 80% 20% 80% 20%;
+                    background: #e89aa9;
+                    opacity: .8;
+                    animation: petalFall 7s linear forwards;
+                    z-index: 3;
+                }
+
+                @keyframes balloonRise {
+
+                    0% {
+                        bottom: -120px;
+                        opacity: 0;
+                    }
+
+                    15% {
+                        opacity: .95;
+                    }
+
+                    100% {
+                        bottom: 110%;
+                        opacity: .9;
+                    }
+                }
+
+                @keyframes balloonSway {
+
+                    from {
+                        transform: translateX(-12px);
+                    }
+
+                    to {
+                        transform: translateX(12px);
+                    }
+                }
+
+                @keyframes starTwinkle {
+
+                    0%, 100% {
+                        opacity: .2;
+                        transform: scale(.7);
+                    }
+
+                    50% {
+                        opacity: 1;
+                        transform: scale(1.5);
+                    }
+                }
+
+                @keyframes petalFall {
+
+                    0% {
+                        transform:
+                            translateY(-30px)
+                            rotate(0deg);
+                        opacity: 0;
+                    }
+
+                    15% {
+                        opacity: .8;
+                    }
+
+                    100% {
+                        transform:
+                            translateY(110vh)
+                            rotate(360deg);
+                        opacity: 0;
+                    }
+                }
+            `;
+
+            document.head.appendChild(style);
+        }
+
+
+        /* ---------- Stars ---------- */
+
+        for (let i = 0; i < 35; i++) {
+
+            const star =
+                document.createElement("div");
+
+            star.className =
+                "birthday-star";
+
+            star.style.left =
+                Math.random() * 100 + "%";
+
+            star.style.top =
+                Math.random() * 100 + "%";
+
+            star.style.animationDelay =
+                Math.random() * 2 + "s";
+
+            container.appendChild(star);
+        }
+
+
+        /* ---------- Petals ---------- */
+
+        for (let i = 0; i < 12; i++) {
+
+            const petal =
+                document.createElement("div");
+
+            petal.className =
+                "birthday-petal";
+
+            petal.style.left =
+                Math.random() * 100 + "%";
+
+            petal.style.animationDelay =
+                Math.random() * 4 + "s";
+
+            container.appendChild(petal);
+        }
+
+
+        /* ---------- Balloons ---------- */
+
+        const colors = [
+            "#d89aa8",
+            "#e7c98a",
+            "#9e8197",
+            "#d7b99b",
+            "#b88b9d",
+            "#c9a86a"
+        ];
+
+        for (let i = 0; i < 10; i++) {
+
+            const balloon =
+                document.createElement("div");
+
+            balloon.className =
+                "birthday-balloon";
+
+            balloon.style.left =
+                (3 + Math.random() * 94) + "%";
+
+            balloon.style.background =
+                colors[i % colors.length];
+
+            balloon.style.animationDelay =
+                Math.random() * 2.5 + "s";
+
+            const size =
+                36 + Math.random() * 16;
+
+            balloon.style.width =
+                size + "px";
+
+            balloon.style.height =
+                size * 1.28 + "px";
+
+            container.appendChild(balloon);
+        }
+    }
+
+    window.createBalloons = createBalloons;
+
+
+    /* -------------------------------------------------
+       SCENE 5 → SCENE 6
+       ------------------------------------------------- */
+
+    function showMemories() {
+        showScene(6);
+    }
+
+
+    /* -------------------------------------------------
+       SCENE 6 → SCENE 7
+       ------------------------------------------------- */
+
+    function showMessage() {
+        showScene(7);
+    }
+
+
+    /* -------------------------------------------------
+       UNIVERSAL CLICK HANDLER
+       
+       This is deliberately ONE listener.
+       It prevents one missing element from breaking
+       all the other buttons.
+       ------------------------------------------------- */
+
+    document.addEventListener("click", function (event) {
+
+        const button =
+            event.target.closest("button");
+
+        if (!button) {
+            return;
+        }
+
+
+        /* Begin the Surprise */
+
+        if (button.id === "startButton") {
+
+            event.preventDefault();
+
+            startSurprise();
+
+            return;
+        }
+
+
+        /* Lights */
+
+        if (button.id === "lightsButton") {
+
+            event.preventDefault();
+
+            turnOnLights();
+
+            return;
+        }
+
+
+        /* Music */
+
+        if (button.id === "musicButton") {
+
+            event.preventDefault();
+
+            playBirthdayMusic();
+
+            return;
+        }
+
+
+        /* Decoration */
+
+        if (button.id === "decorateButton") {
+
+            event.preventDefault();
+
+            decorate();
+
+            return;
+        }
+
+
+        /* Birthday → Memories */
+
+        if (button.id === "wishButton") {
+
+            event.preventDefault();
+
+            showMemories();
+
+            return;
+        }
+
+
+        /* Memories → Message */
+
+        if (button.id === "messageButton") {
+
+            event.preventDefault();
+
+            showMessage();
+
+            return;
+        }
+
     });
 
-    const nextScene = document.getElementById(
-        "scene" + sceneNumber
-    );
 
-    if (nextScene) {
-        nextScene.classList.add("active");
-    }
-}
+    /* -------------------------------------------------
+       INITIAL STATE
+       ------------------------------------------------- */
 
+    function initialize() {
 
-// ---------- Scene 1 → Scene 2 ----------
+        showScene(1);
 
-const startButton =
-    document.getElementById("startButton");
-
-const lightsButton =
-    document.getElementById("lightsButton");
-
-const room =
-    document.querySelector(".room");
-
-
-startButton.addEventListener("click", () => {
-
-    showScene(2);
-
-});
-
-
-// ---------- Turn On Lights ----------
-
-lightsButton.addEventListener("click", () => {
-
-    room.classList.add("lit");
-
-    lightsButton.innerText =
-        "Lights Are On ✦";
-
-    setTimeout(() => {
-
-        showScene(3);
-
-    }, 1800);
-
-});
-
-
-// ---------- Music Scene ----------
-
-const musicButton =
-    document.getElementById("musicButton");
-
-const birthdayMusic =
-    document.getElementById("birthdayMusic");
-
-musicButton.addEventListener("click", async () => {
-
-    try {
-
-        birthdayMusic.currentTime = 0;
-        birthdayMusic.volume = 1;
-
-        await birthdayMusic.play();
-
-        musicButton.innerText =
-            "Music Playing ♪";
-
-        showScene(4);
-
-
-    } catch (error) {
-
-        console.log("Music error:", error);
-
-        musicButton.innerText =
-            "Tap Again ♪";
-
-    }
-
-});
-// ---------- Decoration Scene ----------
-
-const decorateButton =
-    document.getElementById("decorateButton");
-
-
-decorateButton.addEventListener("click", () => {
-
-    createBalloons();
-
-    decorateButton.innerText =
-        "Let the magic begin ✦";
-
-    setTimeout(() => {
-
-        showScene(5);
-
-    }, 1800);
-
-});
-
-
-// ---------- Balloon Generator ----------
-
-function createBalloons() {
-
-    const container =
-        document.getElementById("balloonContainer");
-
-    if (!container) return;
-
-    container.innerHTML = "";
-
-    /* ---------- Premium decoration styles ---------- */
-
-    if (!document.getElementById("premiumDecorationStyle")) {
-
-        const style =
-            document.createElement("style");
-
-        style.id = "premiumDecorationStyle";
-
-        style.innerHTML = `
-
-            .premium-light {
-                position: absolute;
-                width: 5px;
-                height: 5px;
-                border-radius: 50%;
-                background: #f6dfaa;
-                box-shadow:
-                    0 0 8px #f6dfaa,
-                    0 0 18px rgba(246,223,170,.7);
-                opacity: 0;
-                animation: premiumTwinkle 2.5s ease-in-out infinite;
-            }
-
-            .premium-petal {
-                position: absolute;
-                width: 9px;
-                height: 14px;
-                border-radius: 80% 20% 80% 20%;
-                background: #e89aa9;
-                opacity: 0;
-                animation: premiumPetal 7s linear forwards;
-            }
-
-            .premium-balloon {
-                position: absolute;
-                bottom: -120px;
-                width: 42px;
-                height: 54px;
-                border-radius: 50% 50% 45% 45%;
-                opacity: 0;
-                box-shadow:
-                    inset -7px -8px 12px rgba(0,0,0,.18),
-                    0 8px 25px rgba(231,201,138,.12);
-                animation:
-                    premiumRise 8s ease-out forwards,
-                    premiumSway 3s ease-in-out infinite alternate;
-            }
-
-            .premium-balloon::after {
-                content: "";
-                position: absolute;
-                width: 1px;
-                height: 85px;
-                background: rgba(255,255,255,.22);
-                left: 50%;
-                top: 100%;
-            }
-
-            .premium-glow {
-                position: absolute;
-                width: 180px;
-                height: 180px;
-                border-radius: 50%;
-                background: rgba(231,201,138,.08);
-                filter: blur(30px);
-                opacity: 0;
-                animation: premiumGlow 3s ease forwards;
-            }
-
-            @keyframes premiumTwinkle {
-                0%,100% {
-                    opacity: .15;
-                    transform: scale(.7);
-                }
-                50% {
-                    opacity: 1;
-                    transform: scale(1.5);
-                }
-            }
-
-            @keyframes premiumPetal {
-                0% {
-                    transform:
-                        translateY(-30px)
-                        rotate(0deg);
-                    opacity: 0;
-                }
-
-                15% {
-                    opacity: .8;
-                }
-
-                100% {
-                    transform:
-                        translateY(110vh)
-                        rotate(360deg);
-                    opacity: 0;
-                }
-            }
-
-            @keyframes premiumRise {
-                0% {
-                    bottom: -120px;
-                    opacity: 0;
-                }
-
-                15% {
-                    opacity: .95;
-                }
-
-                100% {
-                    bottom: 110%;
-                    opacity: .9;
-                }
-            }
-
-            @keyframes premiumSway {
-                from {
-                    margin-left: -12px;
-                }
-
-                to {
-                    margin-left: 12px;
-                }
-            }
-
-            @keyframes premiumGlow {
-                from {
-                    opacity: 0;
-                    transform: scale(.6);
-                }
-
-                to {
-                    opacity: 1;
-                    transform: scale(1.4);
-                }
-            }
-
-        `;
-
-        document.head.appendChild(style);
+        console.log(
+            "🎂 Aman Birthday Website loaded successfully."
+        );
     }
 
 
-    /* ---------- Soft golden glow ---------- */
+    /* -------------------------------------------------
+       WAIT FOR PAGE
+       ------------------------------------------------- */
 
-    for (let i = 0; i < 3; i++) {
+    if (
+        document.readyState === "loading"
+    ) {
 
-        const glow =
-            document.createElement("div");
+        document.addEventListener(
+            "DOMContentLoaded",
+            initialize
+        );
 
-        glow.className = "premium-glow";
+    } else {
 
-        glow.style.left =
-            (20 + Math.random() * 60) + "%";
+        initialize();
 
-        glow.style.top =
-            (20 + Math.random() * 55) + "%";
-
-        glow.style.animationDelay =
-            (i * 0.5) + "s";
-
-        container.appendChild(glow);
     }
 
-
-    /* ---------- Fairy-light stars ---------- */
-
-    for (let i = 0; i < 35; i++) {
-
-        const light =
-            document.createElement("div");
-
-        light.className = "premium-light";
-
-        light.style.left =
-            Math.random() * 100 + "%";
-
-        light.style.top =
-            Math.random() * 100 + "%";
-
-        light.style.animationDelay =
-            Math.random() * 2.5 + "s";
-
-        container.appendChild(light);
-    }
-
-
-    /* ---------- Floating petals ---------- */
-
-    for (let i = 0; i < 12; i++) {
-
-        const petal =
-            document.createElement("div");
-
-        petal.className = "premium-petal";
-
-        petal.style.left =
-            Math.random() * 100 + "%";
-
-        petal.style.animationDelay =
-            Math.random() * 5 + "s";
-
-        petal.style.transform =
-            "rotate(" +
-            Math.random() * 360 +
-            "deg)";
-
-        container.appendChild(petal);
-    }
-
-
-    /* ---------- Elegant balloons ---------- */
-
-    const balloonStyles = [
-        "#d89aa8",
-        "#e7c98a",
-        "#9e8197",
-        "#d7b99b",
-        "#b88b9d",
-        "#c9a86a"
-    ];
-
-    for (let i = 0; i < 8; i++) {
-
-        const balloon =
-            document.createElement("div");
-
-        balloon.className =
-            "premium-balloon";
-
-        balloon.style.left =
-            (5 + Math.random() * 90) + "%";
-
-        balloon.style.background =
-            balloonStyles[
-                i % balloonStyles.length
-            ];
-
-        balloon.style.animationDelay =
-            (Math.random() * 3) + "s";
-
-        const size =
-            36 + Math.random() * 16;
-
-        balloon.style.width =
-            size + "px";
-
-        balloon.style.height =
-            (size * 1.28) + "px";
-
-        container.appendChild(balloon);
-    }
-
-            }
-// ---------- Birthday Scene ----------
-
-const wishButton =
-    document.getElementById("wishButton");
-
-
-wishButton.addEventListener("click", () => {
-
-    showScene(6);
-
-});
-
-
-// ---------- Photo Scene ----------
-
-const messageButton =
-    document.getElementById("messageButton");
-
-
-messageButton.addEventListener("click", () => {
-
-    showScene(7);
-
-});
-
-
-// ---------- Initial Scene ----------
-
-showScene(1);
-document.addEventListener("DOMContentLoaded", function () {
-    const button = document.getElementById("startButton");
-
-    if (button) {
-        button.onclick = function () {
-            document.getElementById("scene1").classList.remove("active");
-            document.getElementById("scene2").classList.add("active");
-        };
-    }
-});
+})();
