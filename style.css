@@ -1015,3 +1015,135 @@ button span {
 #scene6 .photo-gallery .photo-card {
     border-color: rgba(244,234,220,0.75) !important;
 }
+
+/* ===== FINAL SCENE 6 FIX ===== */
+
+#scene6 {
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+
+    padding: 0 !important;
+}
+
+#scene6 .photo-content {
+    width: 92% !important;
+    max-width: 650px !important;
+
+    margin: 0 auto !important;
+    padding: 60px 0 100px !important;
+
+    text-align: center !important;
+}
+
+#scene6 .photo-gallery {
+    display: flex !important;
+    flex-direction: column !important;
+
+    width: 100% !important;
+    height: auto !important;
+
+    gap: 24px !important;
+
+    margin: 35px 0 0 !important;
+    padding: 0 !important;
+
+    overflow: visible !important;
+    position: static !important;
+}
+
+#scene6 .photo-gallery .photo-card {
+    position: relative !important;
+
+    left: auto !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+
+    transform: none !important;
+
+    width: 100% !important;
+    height: 300px !important;
+    min-height: 300px !important;
+
+    flex: 0 0 300px !important;
+
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+
+    opacity: 1 !important;
+    visibility: visible !important;
+
+    overflow: hidden !important;
+
+    margin: 0 !important;
+}
+
+#scene6 .photo-gallery .photo-card img {
+    width: 55% !important;
+    height: 100% !important;
+
+    flex: 0 0 55% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+
+    display: block !important;
+}
+
+#scene6 .photo-gallery .photo-card p {
+    width: 45% !important;
+    height: 100% !important;
+
+    flex: 0 0 45% !important;
+
+    margin: 0 !important;
+    padding: 20px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    box-sizing: border-box !important;
+    text-align: center !important;
+}
+
+#scene6 #messageButton {
+    display: block !important;
+
+    margin: 45px auto 0 !important;
+}
+
+@media (max-width: 600px) {
+
+    #scene6 .photo-content {
+        width: 92% !important;
+        padding-top: 55px !important;
+        padding-bottom: 90px !important;
+    }
+
+    #scene6 .photo-gallery .photo-card {
+        height: 280px !important;
+        min-height: 280px !important;
+        flex-basis: 280px !important;
+    }
+
+    #scene6 .photo-gallery .photo-card img {
+        width: 55% !important;
+        flex-basis: 55% !important;
+    }
+
+    #scene6 .photo-gallery .photo-card p {
+        width: 45% !important;
+        flex-basis: 45% !important;
+
+        padding: 12px !important;
+        font-size: 17px !important;
+    }
+}
