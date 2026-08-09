@@ -85,8 +85,7 @@ musicButton.addEventListener("click", async () => {
 
             showScene(4);
 
-            createBalloons();
-
+            
         }, 1200);
 
     } catch (error) {
