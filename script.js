@@ -68,25 +68,37 @@ const musicButton =
 
 const birthdayMusic =
     document.getElementById("birthdayMusic");
-musicButton.addEventListener("click", () => {
 
-    birthdayMusic.currentTime = 0;
+musicButton.addEventListener("click", async () => {
 
-    birthdayMusic.play();
+    try {
 
-    musicButton.innerText =
-        "Music Playing ♪";
+        birthdayMusic.currentTime = 0;
+        birthdayMusic.volume = 1;
 
-    setTimeout(() => {
+        await birthdayMusic.play();
 
-        showScene(4);
+        musicButton.innerText =
+            "Music Playing ♪";
 
-        createBalloons();
+        setTimeout(() => {
 
-    }, 1200);
+            showScene(4);
+
+            createBalloons();
+
+        }, 1200);
+
+    } catch (error) {
+
+        console.log("Music error:", error);
+
+        musicButton.innerText =
+            "Tap Again ♪";
+
+    }
 
 });
-
 // ---------- Decoration Scene ----------
 
 const decorateButton =
