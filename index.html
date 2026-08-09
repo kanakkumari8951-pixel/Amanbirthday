@@ -1,129 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aman's Birthday ❤️</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<title>For Aman ❤️</title>
 
-        html,
-        body {
-            margin: 0;
-            width: 100%;
-            height: 100%;
-        }
+<style>
 
-        body {
-            background: #08070b;
-            color: #fff7e8;
-            font-family: Georgia, "Times New Roman", serif;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        .screen {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 30px;
-        }
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
 
-        .content {
-            width: 100%;
-            max-width: 650px;
-        }
+body {
+    background: #08070b;
+    color: #fff7e8;
+    font-family: Georgia, "Times New Roman", serif;
+}
 
-        .small {
-            color: #aaa4ad;
-            letter-spacing: 4px;
-            font-size: 14px;
-            line-height: 1.7;
-        }
+.screen {
+    min-height: 100vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px 20px;
+}
 
-        h1 {
-            font-size: 90px;
-            font-weight: normal;
-            margin: 35px 0;
-        }
+.screen.active {
+    display: flex;
+}
 
-        .subtitle {
-            color: #e7c98a;
-            font-size: 22px;
-            margin-bottom: 55px;
-        }
+.content {
+    width: 100%;
+    max-width: 650px;
+}
 
-        #startButton {
-            border: 1px solid #e7c98a;
-            background: transparent;
-            color: #fff7e8;
-            border-radius: 50px;
-            padding: 18px 35px;
-            font-family: inherit;
-            font-size: 18px;
-            cursor: pointer;
-        }
+.small {
+    color: #aaa4ad;
+    letter-spacing: 4px;
+    font-size: 12px;
+    line-height: 1.7;
+}
 
-        #startButton:active {
-            transform: scale(0.97);
-        }
+h1 {
+    font-size: clamp(60px, 18vw, 90px);
+    font-weight: normal;
+    margin: 25px 0;
+}
 
-        #secondScreen {
-            display: none;
-        }
+h2 {
+    font-size: clamp(30px, 8vw, 45px);
+    font-weight: normal;
+    line-height: 1.25;
+}
 
-        #secondScreen h2 {
-            font-size: 45px;
-            font-weight: normal;
-        }
-        ..memory {
+.subtitle {
+    color: #e7c98a;
+    font-size: 18px;
+    margin-bottom: 45px;
+}
+
+button {
+    border: 1px solid #e7c98a;
+    background: transparent;
+    color: #fff7e8;
+    border-radius: 50px;
+    padding: 14px 25px;
+    font-family: inherit;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(0.96);
+}
+
+
+/* PHOTO SECTION */
+
+.memory {
     margin-top: 30px;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
-        }
+}
 
 .memory img {
-    width: 90%;
-    max-width: 500px;
+    width: 100%;
+    max-width: 420px;
     height: auto;
-    border-radius: 12px;
     display: block;
+    border-radius: 15px;
 }
-    </style>
+
+
+/* MESSAGE */
+
+.message {
+    max-width: 600px;
+    margin: 25px auto;
+    text-align: center;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #eee6d8;
+}
+
+.message p {
+    margin: 20px 0;
+}
+
+.final-line {
+    color: #e7c98a;
+    font-size: 21px;
+}
+
+.signature {
+    margin-top: 30px;
+    color: #aaa4ad;
+    font-style: italic;
+}
+
+</style>
 </head>
+
 
 <body>
 
-    <section id="firstScreen" class="screen">
+<!-- STEP 1 -->
 
-        <div class="content">
+<section id="firstScreen" class="screen active">
 
-            <p class="small">
-                SOMEONE VERY SPECIAL HAS A BIRTHDAY TODAY...
-            </p>
+    <div class="content">
 
-            <h1>Aman</h1>
+        <p class="small">
+            SOMEONE VERY SPECIAL HAS A BIRTHDAY TODAY...
+        </p>
 
-            <p class="subtitle">
-                I made something just for you.
-            </p>
+        <h1>Aman</h1>
 
-            <button id="startButton">
-                Begin the Surprise ♡
-            </button>
+        <p class="subtitle">
+            I made something just for you.
+        </p>
 
-        </div>
+        <button id="startButton">
+            Begin the Surprise ♡
+        </button>
 
-    </section>
+    </div>
+
+</section>
 
 
-    <section id="secondScreen" class="screen">
+<!-- STEP 2 -->
+
+<section id="secondScreen" class="screen">
 
     <div class="content">
 
@@ -143,6 +184,9 @@
 
 </section>
 
+
+<!-- STEP 3 -->
+
 <section id="thirdScreen" class="screen">
 
     <div class="content">
@@ -154,14 +198,20 @@
         <h2>
             A little something for you ❤️
         </h2>
-<button id="photoButton">
-    Continue ♡
-</button>
-        
+
+        <button id="photoButton">
+            Continue ♡
+        </button>
+
     </div>
 
 </section>
-    <section id="fourthScreen" class="screen">
+
+
+<!-- STEP 4 : PHOTOS -->
+
+<section id="fourthScreen" class="screen">
+
     <div class="content">
 
         <p class="small">
@@ -171,42 +221,132 @@
         <h2>
             Some memories, just for us ❤️
         </h2>
+
         <div class="memory">
-    <img src="IMG-20251208-WA0043.jpg" alt="Our memory">
+
+            <img src="IMG-20251208-WA0043.jpg" alt="Our memory">
+
             <img src="IMG-20260201-WA0007.jpg" alt="Our memory">
-<img src="IMG_20260131_031539.jpg" alt="Our memory">
-<img src="IMG_20260426_002835.jpg" alt="Our memory">
+
+            <img src="IMG_20260131_031539.jpg" alt="Our memory">
+
+            <img src="IMG_20260426_002835.jpg" alt="Our memory">
+
+        </div>
+
+        <br>
+
+        <button id="messageButton">
+            One Last Thing ❤️
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- FINAL MESSAGE -->
+
+<section id="fifthScreen" class="screen">
+
+    <div class="content">
+
+        <p class="small">
+            A MESSAGE FOR YOU
+        </p>
+
+        <h2>
+            My Dearest Baby,
+        </h2>
+
+        <div class="message">
+
+            <p>
+                Today is all about celebrating you.
+            </p>
+
+            <p>
+                I hope this year brings you happiness,
+                peace, success, and countless reasons
+                to smile.
+            </p>
+
+            <p>
+                Thank you for being you,
+                and for being such a special
+                part of my life.
+            </p>
+
+            <p class="final-line">
+                Happy Birthday, my love, my baby. ❤️
+            </p>
+
+        </div>
+
+        <div class="signature">
+            — With love
         </div>
 
     </div>
-    
 
+</section>
+
+
+<!-- MUSIC -->
 
 <audio id="birthdayMusic" loop>
+
     <source src="Birthday.mp3" type="audio/mpeg">
+
 </audio>
 
-    </script>
+
+<script>
+
+const firstScreen = document.getElementById("firstScreen");
+const secondScreen = document.getElementById("secondScreen");
+const thirdScreen = document.getElementById("thirdScreen");
+const fourthScreen = document.getElementById("fourthScreen");
+const fifthScreen = document.getElementById("fifthScreen");
+
+const birthdayMusic = document.getElementById("birthdayMusic");
+
 
 document.getElementById("startButton").addEventListener("click", function () {
-    document.getElementById("firstScreen").style.display = "none";
-    document.getElementById("secondScreen").style.display = "flex";
-    document.getElementById("birthdayMusic").play();
-});
+
+    birthdayMusic.play().catch(function(error) {
+        console.log("Music could not start:", error);
     });
+
+    firstScreen.classList.remove("active");
+    secondScreen.classList.add("active");
+
+});
 
 
 document.getElementById("continueButton").addEventListener("click", function () {
 
-    document.getElementById("secondScreen").style.display = "none";
-
-    document.getElementById("thirdScreen").style.display = "flex";
+    secondScreen.classList.remove("active");
+    thirdScreen.classList.add("active");
 
 });
+
+
 document.getElementById("photoButton").addEventListener("click", function () {
-    document.getElementById("thirdScreen").style.display = "none";
-    document.getElementById("fourthScreen").style.display = "flex";
+
+    thirdScreen.classList.remove("active");
+    fourthScreen.classList.add("active");
+
 });
+
+
+document.getElementById("messageButton").addEventListener("click", function () {
+
+    fourthScreen.classList.remove("active");
+    fifthScreen.classList.add("active");
+
+});
+
 </script>
 
 </body>
