@@ -943,3 +943,25 @@ button span {
     opacity: 1 !important;
     visibility: visible !important;
 }
+/* ===== SCENE 6 SCROLL FIX ===== */
+
+#scene6 {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    height: 100% !important;
+}
+
+#scene6 .photo-content {
+    width: 92% !important;
+    max-width: 650px !important;
+    padding: 60px 0 80px !important;
+    box-sizing: border-box !important;
+}
+
+#scene6 .photo-gallery {
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+}
