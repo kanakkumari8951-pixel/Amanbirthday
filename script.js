@@ -412,3 +412,13 @@ messageButton.addEventListener("click", () => {
 // ---------- Initial Scene ----------
 
 showScene(1);
+document.addEventListener("DOMContentLoaded", function () {
+    const button = document.getElementById("startButton");
+
+    if (button) {
+        button.onclick = function () {
+            document.getElementById("scene1").classList.remove("active");
+            document.getElementById("scene2").classList.add("active");
+        };
+    }
+});
